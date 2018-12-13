@@ -22,6 +22,7 @@ namespace Trump_s_Website_Deporter_TM
             else
             {
                 List<string> newURLs = new List<string>(MainForm.ProcessURLs(args));
+                newURLs.RemoveAt(0);
                 MainForm.WriteListToHosts(newURLs,true);
                 //File.Delete(@"C:\Windows\PaExec.exe");
                 Environment.Exit(0);
