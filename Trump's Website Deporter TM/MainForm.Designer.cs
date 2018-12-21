@@ -46,6 +46,7 @@
             this.BtnExport = new System.Windows.Forms.Button();
             this.TxtBoxLog = new System.Windows.Forms.TextBox();
             this.BtnRefresh = new System.Windows.Forms.Button();
+            this.BtnLabel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LstBoxBlocked
@@ -162,11 +163,11 @@
             // 
             this.ChkBoxLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ChkBoxLocal.AutoSize = true;
-            this.ChkBoxLocal.Location = new System.Drawing.Point(159, 287);
+            this.ChkBoxLocal.Location = new System.Drawing.Point(131, 287);
             this.ChkBoxLocal.Name = "ChkBoxLocal";
-            this.ChkBoxLocal.Size = new System.Drawing.Size(166, 17);
+            this.ChkBoxLocal.Size = new System.Drawing.Size(107, 17);
             this.ChkBoxLocal.TabIndex = 10;
-            this.ChkBoxLocal.Text = "Only configure this computer?";
+            this.ChkBoxLocal.Text = "Only this system?";
             this.ChkBoxLocal.UseVisualStyleBackColor = true;
             // 
             // BackWorkerSystemList
@@ -193,7 +194,7 @@
             // 
             this.BtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnExport.Enabled = false;
-            this.BtnExport.Location = new System.Drawing.Point(355, 280);
+            this.BtnExport.Location = new System.Drawing.Point(294, 280);
             this.BtnExport.Name = "BtnExport";
             this.BtnExport.Size = new System.Drawing.Size(55, 29);
             this.BtnExport.TabIndex = 12;
@@ -223,11 +224,23 @@
             this.BtnRefresh.UseVisualStyleBackColor = true;
             this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
+            // BtnLabel
+            // 
+            this.BtnLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnLabel.Location = new System.Drawing.Point(355, 280);
+            this.BtnLabel.Name = "BtnLabel";
+            this.BtnLabel.Size = new System.Drawing.Size(55, 29);
+            this.BtnLabel.TabIndex = 15;
+            this.BtnLabel.Text = "Label";
+            this.BtnLabel.UseVisualStyleBackColor = true;
+            this.BtnLabel.Click += new System.EventHandler(this.BtnLabel_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 345);
+            this.Controls.Add(this.BtnLabel);
             this.Controls.Add(this.BtnRefresh);
             this.Controls.Add(this.TxtBoxLog);
             this.Controls.Add(this.BtnExport);
@@ -271,6 +284,7 @@
         private System.Windows.Forms.Button BtnExport;
         private System.Windows.Forms.TextBox TxtBoxLog;
         private System.Windows.Forms.Button BtnRefresh;
+        private System.Windows.Forms.Button BtnLabel;
     }
 }
 

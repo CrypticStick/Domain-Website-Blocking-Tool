@@ -13,7 +13,7 @@ namespace Trump_s_Website_Deporter_TM
 {
     public partial class MainForm : Form
     {
-        static string heading = 
+        static string heading =
             "# Copyright (c) 1993-2009 Microsoft Corp." + Environment.NewLine +
             "#" + Environment.NewLine +
             "# This is a sample HOSTS file used by Microsoft TCP/IP for Windows." + Environment.NewLine +
@@ -55,6 +55,7 @@ namespace Trump_s_Website_Deporter_TM
         public MainForm()
         {
             InitializeComponent();
+            this.MinimumSize = new System.Drawing.Size(491, 372);
             if (!Decrypt().StartsWith("VALID_FILE"))
             {
                 MessageBox.Show(
@@ -91,7 +92,7 @@ namespace Trump_s_Website_Deporter_TM
             systemList.Clear();
             TxtBoxURL.Clear();
 
-            BackWorkerSystemList.RunWorkerAsync(); 
+            BackWorkerSystemList.RunWorkerAsync();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -209,7 +210,7 @@ namespace Trump_s_Website_Deporter_TM
         {
             BeginInvoke((MethodInvoker)delegate
             { PrgrsBarRemote.Value = 1; });
-            
+
             List<string> localComputers = new List<string>();
 
             if (teachersEdition)
@@ -221,7 +222,8 @@ namespace Trump_s_Website_Deporter_TM
                         if (computer.SchemaClassName == "Computer")
                             localComputers.Add(computer.Name);
                     }
-            } else
+            }
+            else
             {
                 foreach (string system in permittedSystems)
                     localComputers.Add((PingHost(system)) ? system : system + " - Cannot connect");
@@ -232,12 +234,12 @@ namespace Trump_s_Website_Deporter_TM
                 ChkLstBoxSystems.Items.Clear();
                 foreach (string system in localComputers)
                 {
-                    ChkLstBoxSystems.Items.Add(system, 
+                    ChkLstBoxSystems.Items.Add(system,
                         (system.EndsWith(" - Cannot connect")) ? CheckState.Indeterminate : CheckState.Unchecked);
                 }
             });
 
-            
+
 
             return localComputers;
         }
@@ -250,11 +252,12 @@ namespace Trump_s_Website_Deporter_TM
                 foreach (string item in LstBoxBlocked.SelectedItems)
                     TxtBoxURL.AppendText(Environment.NewLine + item);
                 TxtBoxURL.Text = TrimStart(TxtBoxURL.Text, Environment.NewLine);
-            } catch
+            }
+            catch
             { }
         }
 
-        public static void WriteListToHosts(List<string> urls,bool remote)
+        public static void WriteListToHosts(List<string> urls, bool remote)
         {
             ArrayList toWrite = new ArrayList();
 
@@ -273,7 +276,7 @@ namespace Trump_s_Website_Deporter_TM
                     toWrite.ToArray(),
                     new Converter<object, string>(ObjectToString)
                     );
-            
+
             File.WriteAllText(
                 @"c:\Windows\System32\Drivers\etc\hosts",
                 LinesToString(final)
@@ -284,7 +287,7 @@ namespace Trump_s_Website_Deporter_TM
         {
             List<string> newURLs = ProcessURLs(
                 TxtBoxURL.Text.Split(
-                    new string[] { Environment.NewLine }, 
+                    new string[] { Environment.NewLine },
                     StringSplitOptions.None
                     )
                 );
@@ -342,7 +345,7 @@ namespace Trump_s_Website_Deporter_TM
 
             if (ChkBoxLocal.Checked)
             {
-                WriteListToHosts(newURLs,false);
+                WriteListToHosts(newURLs, false);
                 refresh();
             }
             else
@@ -389,7 +392,8 @@ namespace Trump_s_Website_Deporter_TM
                 }
 
                 TxtBoxLog.Text = "Successfully read local restrictions.";
-            } else
+            }
+            else
             {
                 TxtBoxLog.Text = "Please select ONE system to search.";
             }
@@ -407,15 +411,15 @@ namespace Trump_s_Website_Deporter_TM
             foreach (string system in systemList)
             {
                 foreach (string line in lines)
-                if (system.Contains(line) && line != "")
-                {
-                    ChkLstBoxSystems.Items.Add(system);
-                    if (checkedSystems.Contains(system))
-                        ChkLstBoxSystems.SetItemChecked(
-                            ChkLstBoxSystems.Items.IndexOf(system), 
-                            true
-                            );
-                }
+                    if (system.Contains(line) && line != "")
+                    {
+                        ChkLstBoxSystems.Items.Add(system);
+                        if (checkedSystems.Contains(system))
+                            ChkLstBoxSystems.SetItemChecked(
+                                ChkLstBoxSystems.Items.IndexOf(system),
+                                true
+                                );
+                    }
             }
         }
 
@@ -431,7 +435,8 @@ namespace Trump_s_Website_Deporter_TM
             if (CheckState.Unchecked == e.CurrentValue && !checkedSystems.Contains(system))
             {
                 checkedSystems.Add(system);
-            } else
+            }
+            else
             {
                 checkedSystems.Remove(system);
             }
@@ -493,8 +498,9 @@ namespace Trump_s_Website_Deporter_TM
                 BtnRecieve.Enabled = false;
                 BtnApply.Enabled = false;
                 BtnRefresh.Enabled = false;
+                BtnLabel.Enabled = false;
             });
-            
+
             systemList.AddRange(UpdateNetworkComputers());
         }
 
@@ -505,6 +511,7 @@ namespace Trump_s_Website_Deporter_TM
             BtnRecieve.Enabled = true;
             BtnApply.Enabled = true;
             BtnRefresh.Enabled = true;
+            BtnLabel.Enabled = true;
             busy = false;
             TxtBoxLog.Text = "Found systems online!";
         }
@@ -534,7 +541,8 @@ namespace Trump_s_Website_Deporter_TM
                     File.Delete(@"c:\Windows\Temp\twdtm_rhosts.txt");
                     TxtBoxLog.Text = "Successfully recieved blocked websites.";
                 }
-                catch {
+                catch
+                {
                     TxtBoxLog.Text = "Failed to recieve blocked websites.";
                     return;
                 }
@@ -545,7 +553,8 @@ namespace Trump_s_Website_Deporter_TM
                         LstBoxBlocked.Items.Add(line.Split(null)[2]);
                 }
 
-            } else
+            }
+            else
             {
                 TxtBoxLog.Text = "Done! It may take a moment for changes to apply.";
             }
@@ -592,6 +601,46 @@ namespace Trump_s_Website_Deporter_TM
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
             refresh();
+        }
+
+        private string[] GetConfig()
+        {
+            try
+            {
+                return File.ReadAllLines("config", Encoding.UTF8);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private void BtnLabel_Click(object sender, EventArgs e)
+        {
+            if (checkedSystems.Count == 1)
+            {
+                string label = Microsoft.VisualBasic.Interaction.InputBox($"What would you like to call '{checkedSystems[0]}'?", "Label request", "");
+                if (label == "") return;
+                List<string> config = new List<string>(GetConfig());
+
+                if (config.Count == 0)
+                    foreach (string item in permittedSystems)
+                        config.Add(item + ':');
+
+                List<string> newConfig = new List<string>(config);
+
+                foreach (string item in config)
+                    if (item.Substring(0, item.IndexOf(':') - 1).Equals(checkedSystems[0]))
+                    {
+                        newConfig[newConfig.IndexOf(item)] = item.Substring(0, item.IndexOf(':')) + label;
+
+                        File.WriteAllLines("config", newConfig.ToArray());
+                    }
+                    else
+                    {
+                        TxtBoxLog.Text = "Please select ONE system to label.";
+                    }
+            }
         }
     }
 }
