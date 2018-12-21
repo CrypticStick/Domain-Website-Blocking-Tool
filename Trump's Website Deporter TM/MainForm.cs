@@ -591,7 +591,7 @@ namespace Trump_s_Website_Deporter_TM
 
         private void BtnRefresh_Click(object sender, EventArgs e)
         {
-            BackWorkerSystemList.RunWorkerAsync();
+            refresh();
         }
     }
 }
