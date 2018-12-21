@@ -43,8 +43,9 @@
             this.BackWorkerSystemList = new System.ComponentModel.BackgroundWorker();
             this.BackWorkerRemote = new System.ComponentModel.BackgroundWorker();
             this.PrgrsBarRemote = new System.Windows.Forms.ProgressBar();
-            this.BtnImport = new System.Windows.Forms.Button();
             this.BtnExport = new System.Windows.Forms.Button();
+            this.TxtBoxLog = new System.Windows.Forms.TextBox();
+            this.BtnRefresh = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LstBoxBlocked
@@ -56,7 +57,7 @@
             this.LstBoxBlocked.Location = new System.Drawing.Point(9, 88);
             this.LstBoxBlocked.Name = "LstBoxBlocked";
             this.LstBoxBlocked.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.LstBoxBlocked.Size = new System.Drawing.Size(225, 212);
+            this.LstBoxBlocked.Size = new System.Drawing.Size(225, 186);
             this.LstBoxBlocked.TabIndex = 0;
             this.LstBoxBlocked.Click += new System.EventHandler(this.LstBoxBlocked_Click);
             // 
@@ -110,7 +111,7 @@
             this.ChkLstBoxSystems.FormattingEnabled = true;
             this.ChkLstBoxSystems.Location = new System.Drawing.Point(246, 88);
             this.ChkLstBoxSystems.Name = "ChkLstBoxSystems";
-            this.ChkLstBoxSystems.Size = new System.Drawing.Size(225, 214);
+            this.ChkLstBoxSystems.Size = new System.Drawing.Size(225, 184);
             this.ChkLstBoxSystems.TabIndex = 5;
             this.ChkLstBoxSystems.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ChkLstBoxSystems_ItemCheck);
             // 
@@ -126,8 +127,8 @@
             // 
             // BtnApply
             // 
-            this.BtnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnApply.Location = new System.Drawing.Point(9, 310);
+            this.BtnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnApply.Location = new System.Drawing.Point(9, 280);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(55, 29);
             this.BtnApply.TabIndex = 7;
@@ -137,8 +138,8 @@
             // 
             // BtnRecieve
             // 
-            this.BtnRecieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnRecieve.Location = new System.Drawing.Point(70, 310);
+            this.BtnRecieve.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnRecieve.Location = new System.Drawing.Point(70, 280);
             this.BtnRecieve.Name = "BtnRecieve";
             this.BtnRecieve.Size = new System.Drawing.Size(55, 29);
             this.BtnRecieve.TabIndex = 8;
@@ -161,7 +162,7 @@
             // 
             this.ChkBoxLocal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ChkBoxLocal.AutoSize = true;
-            this.ChkBoxLocal.Location = new System.Drawing.Point(159, 317);
+            this.ChkBoxLocal.Location = new System.Drawing.Point(159, 287);
             this.ChkBoxLocal.Name = "ChkBoxLocal";
             this.ChkBoxLocal.Size = new System.Drawing.Size(166, 17);
             this.ChkBoxLocal.TabIndex = 10;
@@ -188,32 +189,47 @@
             this.PrgrsBarRemote.Step = 1;
             this.PrgrsBarRemote.TabIndex = 11;
             // 
-            // BtnImport
-            // 
-            this.BtnImport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnImport.Location = new System.Drawing.Point(416, 310);
-            this.BtnImport.Name = "BtnImport";
-            this.BtnImport.Size = new System.Drawing.Size(55, 29);
-            this.BtnImport.TabIndex = 13;
-            this.BtnImport.Text = "Import";
-            this.BtnImport.UseVisualStyleBackColor = true;
-            // 
             // BtnExport
             // 
             this.BtnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BtnExport.Location = new System.Drawing.Point(355, 310);
+            this.BtnExport.Enabled = false;
+            this.BtnExport.Location = new System.Drawing.Point(355, 280);
             this.BtnExport.Name = "BtnExport";
             this.BtnExport.Size = new System.Drawing.Size(55, 29);
             this.BtnExport.TabIndex = 12;
             this.BtnExport.Text = "Export";
             this.BtnExport.UseVisualStyleBackColor = true;
+            this.BtnExport.Visible = false;
+            this.BtnExport.Click += new System.EventHandler(this.BtnExport_Click);
+            // 
+            // TxtBoxLog
+            // 
+            this.TxtBoxLog.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.TxtBoxLog.Location = new System.Drawing.Point(9, 319);
+            this.TxtBoxLog.Name = "TxtBoxLog";
+            this.TxtBoxLog.ReadOnly = true;
+            this.TxtBoxLog.Size = new System.Drawing.Size(462, 20);
+            this.TxtBoxLog.TabIndex = 13;
+            // 
+            // BtnRefresh
+            // 
+            this.BtnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BtnRefresh.Location = new System.Drawing.Point(416, 280);
+            this.BtnRefresh.Name = "BtnRefresh";
+            this.BtnRefresh.Size = new System.Drawing.Size(55, 29);
+            this.BtnRefresh.TabIndex = 14;
+            this.BtnRefresh.Text = "Refresh";
+            this.BtnRefresh.UseVisualStyleBackColor = true;
+            this.BtnRefresh.Click += new System.EventHandler(this.BtnRefresh_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(483, 345);
-            this.Controls.Add(this.BtnImport);
+            this.Controls.Add(this.BtnRefresh);
+            this.Controls.Add(this.TxtBoxLog);
             this.Controls.Add(this.BtnExport);
             this.Controls.Add(this.PrgrsBarRemote);
             this.Controls.Add(this.ChkBoxLocal);
@@ -252,8 +268,9 @@
         private System.ComponentModel.BackgroundWorker BackWorkerSystemList;
         private System.ComponentModel.BackgroundWorker BackWorkerRemote;
         private System.Windows.Forms.ProgressBar PrgrsBarRemote;
-        private System.Windows.Forms.Button BtnImport;
         private System.Windows.Forms.Button BtnExport;
+        private System.Windows.Forms.TextBox TxtBoxLog;
+        private System.Windows.Forms.Button BtnRefresh;
     }
 }
 
